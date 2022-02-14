@@ -1,6 +1,5 @@
 body {
     background-color: black;
-    height: 80vh;
     justify-content:center;
 }
 
@@ -11,8 +10,7 @@ header {
     justify-content: center;
 }
 
-section {
-    margin-top: 50px;
+.pg-inicial {
     display: flex;
     justify-content: center;
 }
@@ -25,8 +23,10 @@ button {
     color: yellow;
 }
 
-canvas {
-    background-color: #fe8c00;
+.tabuleiro {
+    background-color: #f83600;
+    justify-content: center;
+    margin-top: 10px;
 }
 
 footer {
