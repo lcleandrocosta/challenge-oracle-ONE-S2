@@ -1,0 +1,36 @@
+body {
+    background-color: black;
+    height: 80vh;
+    justify-content:center;
+}
+
+header {
+    color: yellow;
+    display: flex;
+    font-size: 100px;
+    justify-content: center;
+}
+
+section {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    border-radius: 30px;
+    background-color: #fe8c00 ;
+    margin-top: 50px;
+    font-size: 50px;
+    color: yellow;
+}
+
+canvas {
+    background-color: #fe8c00;
+}
+
+footer {
+    color: yellow;
+    display: flex;
+    justify-content: center;
+}
