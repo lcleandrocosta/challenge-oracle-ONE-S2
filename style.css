@@ -25,8 +25,19 @@ button {
 
 .tabuleiro {
     background-color: white;
+    display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 30px;
+}
+
+canvas {
+    background-image: url("img/folha.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 500px;
+
+    
 }
 
 footer {
