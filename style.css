@@ -10,20 +10,44 @@ header {
     justify-content: center;
 }
 
-.pg-inicial {
+.div-pg-inicial {
     display: flex;
     justify-content: center;
 }
 
 button {
     border-radius: 30px;
+    border: none;
     background-color: #fe8c00 ;
     margin-top: 50px;
     font-size: 50px;
     color: yellow;
+    transition: all 0.5s linear;
 }
 
-.tabuleiro {
+button:hover {
+    background-color: #04fc2d;
+}
+
+.div-nova-palavra {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+input {
+    font-size: 30px;
+    height: 50px;
+    width: 300px;
+        
+}
+
+.div-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.div-tabuleiro {
     background-color: white;
     display: flex;
     justify-content: center;
@@ -35,13 +59,12 @@ canvas {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 500px;
-
-    
+    height: 500px;   
 }
 
 footer {
     color: yellow;
     display: flex;
     justify-content: center;
+    margin-top: 180px;
 }
