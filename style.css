@@ -3,11 +3,21 @@ body {
     justify-content:center;
 }
 
-header {
+.cabecalho {
     color: yellow;
     display: flex;
-    font-size: 100px;
+    font-family: cursive;
+    font-size: 80px;
     justify-content: center;
+}
+
+.cabecalho-jogo{
+    color: yellow;
+    display: flex;
+    font-family: cursive;
+    font-size: 80px;
+    justify-content: center;
+    text-align: center;
 }
 
 .div-pg-inicial {
@@ -20,13 +30,14 @@ button {
     border: none;
     background-color: #fe8c00 ;
     margin-top: 50px;
+    font-family: cursive;
     font-size: 50px;
     color: yellow;
     transition: all 0.5s linear;
 }
 
 button:hover {
-    background-color: #04fc2d;
+    background-color: #011304;
 }
 
 .div-nova-palavra {
@@ -36,6 +47,8 @@ button:hover {
 }
 
 input {
+    border-radius: 30px;
+    font-family: cursive;
     font-size: 30px;
     height: 50px;
     width: 300px;
@@ -48,7 +61,7 @@ input {
 }
 
 .div-tabuleiro {
-    background-color: white;
+    background-color: black;
     display: flex;
     justify-content: center;
     margin-top: 30px;
@@ -59,12 +72,14 @@ canvas {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 500px;   
+    /*height: 600px;  */
+    display: flex; 
 }
 
 footer {
     color: yellow;
     display: flex;
+    font-family: cursive;
     justify-content: center;
     margin-top: 180px;
 }

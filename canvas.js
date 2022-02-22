@@ -1,23 +1,148 @@
 //var tela = document.querySelector('canvas');
 //var traco = tela.getContext('2d');
-const BOTAO = document.querySelector('button');
-var palavras = ['pa', 'alura', 'PARADA'];
-var letra = palavras[2];
-var tam = letra.length;
-var l = letra[0];
-console.log(l);
+const botaoIniciar = document.querySelector('.btn-iniciar');
+const botaoNovaPalavra = document.querySelector('.btn-input');
+const palavraUsuario = document.querySelector('.input-nova-palavra');
+const cabecalho = document.querySelector('.cabecalho');
+//var letrasMaiusculas = ['A','B','C','D','E','F','G','H','I','J','K',
+//'L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+var palavras = ['ORACLE','ALURA', 'PROGRAMA'];
+var tamArray = palavras.length;
+var posicaoArray = Math.floor(Math.random() * tamArray);
+var palavra = palavras[posicaoArray];
+var tam = palavra.length;
+var encontrouLetraEm;
+var letraPosicao;
+var acertou = true;
+var erros = 0;
+var acertos = 0;
+var incremento = 0;
+var inicial = 205;
 
 //Elemento canvas
 var c = document.querySelector("canvas");
 var ctx = c.getContext("2d");
+var x = 0;
 
-//Função que inicia o jogo
-function iniciarJogo(){
+function mostrarMsgVencedor(){
+    ctx.font = '50px cursive';
+    ctx.fillStyle = 'green';
+    ctx.fillText('Parabéns! Você ganhou!!', 410, 200 );
+    ctx.stroke();
+}
+
+function mostrarMsgPerdeu(){
+    let palavraCerta = palavra;
+    ctx.font = '30px cursive';
+    ctx.fillStyle = 'red';
+    ctx.fillText('Que pena! Você não acertou!!', 500, 100 );
+    ctx.fillText('A palavra era:', 500, 150 );
+    ctx.fillStyle = 'black';
+    ctx.fillText(palavras[posicaoArray], 700, 150 );
+    ctx.stroke(); 
+}
+
+// Mostra letras erradas
+function mostrarLetrasErradas(letra, pos){
+    let x = 410;
+    const valor = 40;
+    ctx.font = '50px cursive';
+    ctx.fillStyle = 'red';
+    for(let i=1; i<pos+1; i++){
+        if(i == erros){
+            ctx.fillText(letra, x, 300);
+            ctx.stroke();
+        } 
+        x = x+valor;
+    }      
+}
+
+//Inserir nova palavra
+function insereNovaPalavra(){ 
+    let palavraNova = palavraUsuario.value;
+    let transfPalavraNovaMaiusc = palavraNova.toUpperCase();
+    palavraUsuario.focus();
+    palavras.push(transfPalavraNovaMaiusc);
+    palavraUsuario.value = "";
+}
+
+// Recebe tecla digitada
+function entraLetraDoJogador(event){
+    var tecla = event.key;
+    var letraDigitada = tecla.toUpperCase();
+    let encontrou = palavra.match(letraDigitada);
+    acertou = false;
+    //inicial = 410;
+    //incremento = 80;
+    while(encontrou != null){ 
+        letraPosicao = palavra.search(letraDigitada);
+        insereLetras(letraDigitada,letraPosicao);
+        palavra = palavra.replace(letraDigitada, '0');
+        console.log(palavra);
+        encontrou = palavra.match(letraDigitada);
+        acertos++;
+        acertou = true;
+    }
+
+    var tamanhoForca = 8;
+    
+    if(!acertou){
+        erros++;
+        
+        montarForca(erros);
+        mostrarLetrasErradas(letraDigitada, erros);
+    }
+
+    if(erros == tamanhoForca){
+        mostrarMsgPerdeu();
+    }
+
+    if(acertos == tam){
+        mostrarMsgVencedor();
+        
+    }
+
+
+}
+
+
+// Escuta o evento de teclado
+function jogar(){
+    // Dispara evento do teclado
+    document.addEventListener('keydown', entraLetraDoJogador);
+    
+}
+
+// Manipula os elementos da página
+function manipularElementos(){
     document.querySelector("canvas").style.display = 'block';
+    document.querySelector(".tabuleiro").style.display = 'block';
     document.querySelector(".div-nova-palavra").style.display = 'none';
     document.querySelector(".div-pg-inicial").style.display = 'none';
     document.querySelector(".div-btn").style.display = 'none';
-    BOTAO.onclick = criaTracos(tam);
+    document.querySelector(".cabecalho").style.display = 'none'; 
+    document.querySelector(".cabecalho-jogo").style.display = 'block';
+}
+
+//Função que inicia o jogo
+function iniciarJogo(){
+    manipularElementos();
+    criaTracos(tam);
+    jogar();
+}
+
+function insereLetras(letra, posicao){
+    let x =  410;
+    const VALOR = 80;
+    for(let i=0; i<posicao+1; i++){
+        ctx.font = '50px cursive';
+        ctx.fillStyle = 'blue';
+        if(i==posicao){
+            ctx.fillText(letra, x, 395);
+            ctx.stroke();
+        }
+        x = x + VALOR;
+    }       
 }
 
 //Função para criar os traços de acordo com a quantidade de letras.
@@ -101,16 +226,39 @@ function criaPernaEsquerda(){
 }
 //Fim das funções de criação do boneco da forca.
 
-//Inicia o jogo ao clicar no botão Iniciar jogo.
-BOTAO.addEventListener('click', iniciarJogo);
+// Montar a forca de acordo com os erros
+function montarForca(index){
+    switch(index) {
+        case 1:
+            criaForcaVertical();
+            break;
+        case 2:
+            criaForcaHorizontal();
+            break;
+        case 3:
+            criaCabeca();
+            break;
+        case 4:
+            criaCorpo();
+            break;
+        case 5:
+            criaBracoDireito();
+            break;
+        case 6:
+            criaBracoEsquerdo();
+            break;
+        case 7:
+            criaPernaDireita();
+            break;
+        case 8:
+            criaPernaEsquerda();
+            break;
+        default:
+            alert('Perdeu');
+    }
+}
 
-criaForcaVertical();
-criaForcaHorizontal();
-criaCabeca();
-criaCabeca();
-criaCorpo();
-criaBracoDireito();
-criaBracoEsquerdo();
-criaPernaDireita();
-criaPernaEsquerda();
-console.log(tam);
+
+//Inicia o jogo ao clicar no botão Iniciar jogo.
+botaoIniciar.addEventListener('click', iniciarJogo);
+botaoNovaPalavra.addEventListener('click', insereNovaPalavra);
