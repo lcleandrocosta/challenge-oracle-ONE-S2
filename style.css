@@ -99,3 +99,9 @@ footer {
       50% { opacity: .1; } 
       100% { opacity: 1; }
   }
+
+  .btn-iniciar{
+    color:yellow;
+    -webkit-animation: flash linear 1s infinite;
+    animation: flash linear 1s infinite;
+  }
