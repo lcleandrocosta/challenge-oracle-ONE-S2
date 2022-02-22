@@ -2,6 +2,7 @@
 
 ## 👨‍🎓 Desafio do curso Lógica de programação
 
+![Alt text](img/jogo.gif)
 
 ## 👀 Sobre
 Challenge Oracle ONE - Lógica de Programação - Semana 03 e 04. Desenvolver o **jogo da forca** como projeto final do curso inciante em programação.
