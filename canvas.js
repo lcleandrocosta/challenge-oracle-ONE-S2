@@ -6,7 +6,7 @@ const palavraUsuario = document.querySelector('.input-nova-palavra');
 const cabecalho = document.querySelector('.cabecalho');
 //var letrasMaiusculas = ['A','B','C','D','E','F','G','H','I','J','K',
 //'L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-var palavras = ['ORACLE','ALURA', 'PROGRAMA'];
+var palavras = ['UVA','BANANA','ESCOLA','ORACLE','PROGRAMA', 'ALURA',];
 var tamArray = palavras.length;
 var posicaoArray = Math.floor(Math.random() * tamArray);
 var palavra = palavras[posicaoArray];
@@ -24,18 +24,52 @@ var c = document.querySelector("canvas");
 var ctx = c.getContext("2d");
 var x = 0;
 
+//Função para criar os traços de acordo com a quantidade de letras.
+function criaTracos(t){
+    var x1 = 400;
+    var x2 = 450;
+    const VALOR = 80;
+    for(let i=0; i<t; i++){ 
+        ctx.lineWidth = 5;
+        ctx.beginPath();
+        ctx.moveTo(x1, 400);
+        ctx.lineTo(x2, 400);
+        ctx.stroke();
+        x1 = x1 + VALOR;
+        x2 = x2 + VALOR;
+    }
+}
+
+
+// Insere as letras digitadas na posição de acordo com a palavra sorteada
+function insereLetras(letra, posicao){
+    let x =  410;
+    const VALOR = 80;
+    for(let i=0; i<posicao+1; i++){
+        ctx.font = '50px cursive';
+        ctx.fillStyle = 'blue';
+        if(i==posicao){
+            ctx.fillText(letra, x, 395);
+            ctx.stroke();
+        }
+        x = x + VALOR;
+    }       
+}
+
+// Mostra a mensagem de vitória
 function mostrarMsgVencedor(){
     ctx.font = '50px cursive';
     ctx.fillStyle = 'green';
-    ctx.fillText('Parabéns! Você ganhou!!', 410, 200 );
+    ctx.fillText('Parabéns! Você ganhou!!', 410, 210 );
     ctx.stroke();
 }
 
+//Mostra a mensagem de perda
 function mostrarMsgPerdeu(){
     let palavraCerta = palavra;
     ctx.font = '30px cursive';
     ctx.fillStyle = 'red';
-    ctx.fillText('Que pena! Você não acertou!!', 500, 100 );
+    ctx.fillText('Que pena! Você não acertou!!', 500, 90 );
     ctx.fillText('A palavra era:', 500, 150 );
     ctx.fillStyle = 'black';
     ctx.fillText(palavras[posicaoArray], 700, 150 );
@@ -50,7 +84,7 @@ function mostrarLetrasErradas(letra, pos){
     ctx.fillStyle = 'red';
     for(let i=1; i<pos+1; i++){
         if(i == erros){
-            ctx.fillText(letra, x, 300);
+            ctx.fillText(letra, x, 335);
             ctx.stroke();
         } 
         x = x+valor;
@@ -72,8 +106,7 @@ function entraLetraDoJogador(event){
     var letraDigitada = tecla.toUpperCase();
     let encontrou = palavra.match(letraDigitada);
     acertou = false;
-    //inicial = 410;
-    //incremento = 80;
+
     while(encontrou != null){ 
         letraPosicao = palavra.search(letraDigitada);
         insereLetras(letraDigitada,letraPosicao);
@@ -131,35 +164,9 @@ function iniciarJogo(){
     jogar();
 }
 
-function insereLetras(letra, posicao){
-    let x =  410;
-    const VALOR = 80;
-    for(let i=0; i<posicao+1; i++){
-        ctx.font = '50px cursive';
-        ctx.fillStyle = 'blue';
-        if(i==posicao){
-            ctx.fillText(letra, x, 395);
-            ctx.stroke();
-        }
-        x = x + VALOR;
-    }       
-}
-
-//Função para criar os traços de acordo com a quantidade de letras.
-function criaTracos(t){
-    var x1 = 400;
-    var x2 = 450;
-    const VALOR = 80;
-    for(let i=0; i<t; i++){ 
-        ctx.lineWidth = 5;
-        ctx.beginPath();
-        ctx.moveTo(x1, 400);
-        ctx.lineTo(x2, 400);
-        ctx.stroke();
-        x1 = x1 + VALOR;
-        x2 = x2 + VALOR;
-    }
-}
+//Inicia o jogo ao clicar no botão Iniciar jogo.
+botaoIniciar.addEventListener('click', iniciarJogo);
+botaoNovaPalavra.addEventListener('click', insereNovaPalavra);
 
 //Funções de criação de partes do boneco da forca
 function criaForcaVertical(){
@@ -257,8 +264,3 @@ function montarForca(index){
             alert('Perdeu');
     }
 }
-
-
-//Inicia o jogo ao clicar no botão Iniciar jogo.
-botaoIniciar.addEventListener('click', iniciarJogo);
-botaoNovaPalavra.addEventListener('click', insereNovaPalavra);
