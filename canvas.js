@@ -1,9 +1,9 @@
-//var tela = document.querySelector('canvas');
-//var traco = tela.getContext('2d');
+// Variáveis principais
 const botaoIniciar = document.querySelector('.btn-iniciar');
 const botaoNovaPalavra = document.querySelector('.btn-input');
 const palavraUsuario = document.querySelector('.input-nova-palavra');
 const cabecalho = document.querySelector('.cabecalho');
+
 //var letrasMaiusculas = ['A','B','C','D','E','F','G','H','I','J','K',
 //'L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 var palavras = ['UVA','BANANA','ESCOLA','ORACLE','PROGRAMA', 'ALURA',];
@@ -11,13 +11,10 @@ var tamArray = palavras.length;
 var posicaoArray = Math.floor(Math.random() * tamArray);
 var palavra = palavras[posicaoArray];
 var tam = palavra.length;
-var encontrouLetraEm;
 var letraPosicao;
 var acertou = true;
 var erros = 0;
 var acertos = 0;
-var incremento = 0;
-var inicial = 205;
 
 //Elemento canvas
 var c = document.querySelector("canvas");
@@ -111,7 +108,6 @@ function entraLetraDoJogador(event){
         letraPosicao = palavra.search(letraDigitada);
         insereLetras(letraDigitada,letraPosicao);
         palavra = palavra.replace(letraDigitada, '0');
-        console.log(palavra);
         encontrou = palavra.match(letraDigitada);
         acertos++;
         acertou = true;
@@ -132,10 +128,7 @@ function entraLetraDoJogador(event){
 
     if(acertos == tam){
         mostrarMsgVencedor();
-        
     }
-
-
 }
 
 
