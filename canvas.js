@@ -159,6 +159,8 @@ function iniciarJogo(){
 
 //Inicia o jogo ao clicar no botão Iniciar jogo.
 botaoIniciar.addEventListener('click', iniciarJogo);
+
+// Insere nova palavra no jogo
 botaoNovaPalavra.addEventListener('click', insereNovaPalavra);
 
 //Funções de criação de partes do boneco da forca
