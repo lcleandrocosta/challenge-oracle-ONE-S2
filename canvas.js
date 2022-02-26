@@ -256,6 +256,6 @@ function montarForca(index){
             criaPernaEsquerda();
             break;
         default:
-            alert('Perdeu');
+            location.reload();
     }
 }
