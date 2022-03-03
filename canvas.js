@@ -6,7 +6,7 @@ const cabecalho = document.querySelector('.cabecalho');
 
 //var letrasMaiusculas = ['A','B','C','D','E','F','G','H','I','J','K',
 //'L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-var palavras = ['UVA','BANANA','ESCOLA','ORACLE','PROGRAMA', 'ALURA',];
+var palavras = ['UVA','BANANA','ESCOLA','ORACLE','PROGRAMA', 'ALURA'];
 var tamArray = palavras.length;
 var posicaoArray = Math.floor(Math.random() * tamArray);
 var palavra = palavras[posicaoArray];
@@ -113,6 +113,7 @@ function entraLetraDoJogador(event){
         acertou = true;
     }
 
+    // Quantidade de componentes da forca
     var tamanhoForca = 8;
     
     if(!acertou){
@@ -124,10 +125,14 @@ function entraLetraDoJogador(event){
 
     if(erros == tamanhoForca){
         mostrarMsgPerdeu();
+        document.querySelector(".cabecalho-jogo").style.display = 'none';
+        document.querySelector(".cabecalho-jogo-erro").style.display = 'block';
     }
 
     if(acertos == tam){
         mostrarMsgVencedor();
+        document.querySelector(".cabecalho-jogo").style.display = 'none';
+        document.querySelector(".cabecalho-jogo-acerto").style.display = 'block';
     }
 }
 
